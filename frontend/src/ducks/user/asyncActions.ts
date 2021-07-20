@@ -15,7 +15,7 @@ export const asyncRegisterUser = createAsyncThunk(
     );
 
     return {
-      username: response.data.user as string,
+      username: response.data.user.username as string,
       jwt: response.data.jwt as string,
     };
   }

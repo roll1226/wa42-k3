@@ -2,6 +2,7 @@ import { Store, combineReducers } from "redux";
 import logger from "redux-logger";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import userSlice, { initialState as userState } from "./user/slice";
+import reduxThunk from "redux-thunk";
 
 const rootReducer = combineReducers({
   user: userSlice.reducer,
@@ -15,7 +16,7 @@ export type StoreState = ReturnType<typeof preloadedState>;
 
 export type ReduxStore = Store<StoreState>;
 
-const middlewareList = [logger];
+const middlewareList = [logger, reduxThunk];
 
 const createStore = configureStore({
   reducer: rootReducer,

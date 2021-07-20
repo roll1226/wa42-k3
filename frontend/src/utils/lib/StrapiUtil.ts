@@ -1,6 +1,4 @@
-import axios from "axios";
-import { env } from "../../env/DotEnv";
-
+import axiosUtil from "./AxiosUtil";
 class StrapiUtil {
   /**
    * create account
@@ -8,8 +6,12 @@ class StrapiUtil {
    * @param {string} email
    * @param {string} password
    */
-  public static createAccount(username: string, email: string, password: string) {
-    return axios.post(`${env.getStrapiUrl()}/auth/local/register`, {
+  public static createAccount(
+    username: string,
+    email: string,
+    password: string
+  ) {
+    return axiosUtil.post(`/auth/local/register`, {
       username,
       email,
       password,

@@ -20,7 +20,7 @@ const Body = styled.div`
   grid-template-rows: auto 1fr auto;
 `;
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps, router }: AppProps) => {
   return (
     <Provider store={createStore}>
       <GlobalStyle />

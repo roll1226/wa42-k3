@@ -1,5 +1,7 @@
+import { UserInfoModel } from "../../models/strapi/UserInfoModel";
+
 export type UserStateType = {
-  username: string;
+  userInfo: UserInfoModel | null;
   jwt: string;
   loading: boolean;
   isError: boolean;

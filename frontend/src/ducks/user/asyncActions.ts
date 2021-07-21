@@ -1,4 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { UserInfoModel } from "../../models/strapi/UserInfoModel";
+import LoggerUtil from "../../utils/debugger/LoggerUtil";
 import StrapiUtil from "../../utils/lib/StrapiUtil";
 
 export const asyncRegisterUser = createAsyncThunk(
@@ -7,15 +9,17 @@ export const asyncRegisterUser = createAsyncThunk(
     username: string;
     email: string;
     password: string;
-  }): Promise<{ username: string; jwt: string }> => {
+  }): Promise<{ userInfo: UserInfoModel; jwt: string }> => {
     const response = await StrapiUtil.createAccount(
       arg.username,
       arg.email,
       arg.password
     );
 
+    LoggerUtil.debug(response);
+
     return {
-      username: response.data.user.username as string,
+      userInfo: response.data.user as UserInfoModel,
       jwt: response.data.jwt as string,
     };
   }

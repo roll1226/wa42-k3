@@ -23,7 +23,7 @@ export default function Home() {
 
       <button onClick={test}>test click</button>
 
-      <p>{state.username}</p>
+      <p>{state.userInfo?.username}</p>
       <p>{state.jwt}</p>
     </div>
   );

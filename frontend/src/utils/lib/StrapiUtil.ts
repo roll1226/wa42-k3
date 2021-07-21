@@ -17,6 +17,18 @@ class StrapiUtil {
       password,
     });
   }
+
+  /**
+   * sign in account
+   * @param {string} identifier
+   * @param {string} password
+   */
+  public static signInAccount(identifier: string, password: string) {
+    return axiosUtil.post("/auth/local", {
+      identifier,
+      password,
+    });
+  }
 }
 
 export default StrapiUtil;

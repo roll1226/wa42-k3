@@ -1,11 +1,12 @@
+import LoggerUtil from "../../utils/debugger/LoggerUtil";
 import ButtonAtom from "../atoms/ButtonAtom";
 
-type Props = {
-  onClick: () => void;
-};
+const SignInButtonMolecule = () => {
+  const signIn = () => {
+    LoggerUtil.debug("sign in");
+  };
 
-const SignInButtonMolecule = ({ onClick }: Props) => {
-  return <ButtonAtom text={"ログイン"} onClick={onClick} />;
+  return <ButtonAtom text={"ログイン"} onClick={signIn} isBorder={false} />;
 };
 
 export default SignInButtonMolecule;

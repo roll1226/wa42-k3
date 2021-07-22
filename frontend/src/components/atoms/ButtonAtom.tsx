@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import GeneralColorStyle from "../../styles/GeneralColorstyle";
+import GeneralColorStyle from "../../styles/GeneralColorStyle";
 import ColorUtil from "../../utils/color/ColorUtil";
 
 type Props = {

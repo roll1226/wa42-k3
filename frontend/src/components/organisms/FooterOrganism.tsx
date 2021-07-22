@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import GeneralColorStyle from "../../styles/GeneralColorstyle";
+import GeneralColorStyle from "../../styles/GeneralColorStyle";
 
 const FooterContainer = styled.footer`
   padding: 32px 200px;

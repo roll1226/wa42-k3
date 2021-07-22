@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useUserState } from "../../ducks/user/selectors";
 import { useUserInfoEffect } from "../../hooks/useUserInfoEffect";
-import GeneralColorStyle from "../../styles/GeneralColorstyle";
+import GeneralColorStyle from "../../styles/GeneralColorStyle";
 import ColorUtil from "../../utils/color/ColorUtil";
 import RegisterButtonMolecule from "../molecules/RegisterButtonMolecule";
 import SignInButtonMolecule from "../molecules/SignInButtonMolecule";

@@ -22,4 +22,13 @@ export default class SessionUtil {
   public static getSession(key: string): string | null {
     return sessionStorage.getItem(key);
   }
+
+  /**
+   * remove session
+   *
+   * @param {string} key
+   */
+  public static removeSession(key: string) {
+    sessionStorage.removeItem(key);
+  }
 }

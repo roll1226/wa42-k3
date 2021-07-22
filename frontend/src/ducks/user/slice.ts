@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserInfoModel } from "../../models/strapi/UserInfoModel";
-import LoggerUtil from "../../utils/debugger/LoggerUtil";
 import SessionUtil from "../../utils/session/SessionUtil";
-import { asyncRegisterUser } from "./asyncActions";
+import { asyncRegisterUser, asyncSignInUser } from "./asyncActions";
 import { UserStateType } from "./type";
 
 export const initialState: UserStateType = {
@@ -34,9 +33,7 @@ const userSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    /**
-     * register user pending
-     */
+    // register user pending
     builder.addCase(asyncRegisterUser.pending, (state) => {
       return {
         ...state,
@@ -46,9 +43,7 @@ const userSlice = createSlice({
       };
     });
 
-    /**
-     * register user rejected
-     */
+    // register user rejected
     builder.addCase(
       asyncRegisterUser.rejected,
       (
@@ -63,16 +58,70 @@ const userSlice = createSlice({
           ...state,
           loading: false,
           isError: true,
+          error: "登録に失敗しました。",
+        };
+      }
+    );
+
+    // register user fulfilled
+    builder.addCase(
+      asyncRegisterUser.fulfilled,
+      (
+        state,
+        action: PayloadAction<{
+          userInfo: UserInfoModel;
+          jwt: string;
+        }>
+      ) => {
+        SessionUtil.setSession(
+          "userInfo",
+          JSON.stringify(action.payload.userInfo)
+        );
+        SessionUtil.setSession("jwt", action.payload.jwt);
+
+        return {
+          ...state,
+          loading: false,
+          isError: false,
+          error: "",
+          userInfo: action.payload.userInfo,
+          jwt: action.payload.jwt,
+        };
+      }
+    );
+
+    // sign in user pending
+    builder.addCase(asyncSignInUser.pending, (state) => {
+      return {
+        ...state,
+        loading: true,
+        isError: false,
+        error: "",
+      };
+    });
+
+    // sign in user rejected
+    builder.addCase(
+      asyncSignInUser.rejected,
+      (
+        state,
+        action: RejectedAction<{
+          email: string;
+          password: string;
+        }>
+      ) => {
+        return {
+          ...state,
+          loading: false,
+          isError: true,
           error: "ログインに失敗しました。",
         };
       }
     );
 
-    /**
-     * register user fulfilled
-     */
+    // sign in user fulfilled
     builder.addCase(
-      asyncRegisterUser.fulfilled,
+      asyncSignInUser.fulfilled,
       (
         state,
         action: PayloadAction<{

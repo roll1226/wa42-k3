@@ -1,16 +1,25 @@
 import { useDispatch } from "react-redux";
 import HeadAtoms from "../components/atoms/HeadAtom";
-import { asyncRegisterUser } from "../ducks/user/asyncActions";
+import { asyncRegisterUser, asyncSignInUser } from "../ducks/user/asyncActions";
 import { useUserState } from "../ducks/user/selectors";
 
 export default function Home() {
   const dispatch = useDispatch();
   const state = useUserState().user;
 
-  const test = async () => {
-    await dispatch(
+  const test = () => {
+    dispatch(
       asyncRegisterUser({
         username: "hoge",
+        email: "hoge@example.com",
+        password: "hoge1234",
+      })
+    );
+  };
+
+  const signIn = () => {
+    dispatch(
+      asyncSignInUser({
         email: "hoge@example.com",
         password: "hoge1234",
       })
@@ -21,7 +30,8 @@ export default function Home() {
     <div>
       <HeadAtoms title="HOME" />
 
-      <button onClick={test}>test click</button>
+      <button onClick={test}>register click</button>
+      <button onClick={signIn}>sign in click</button>
 
       <p>{state.userInfo?.username}</p>
       <p>{state.jwt}</p>

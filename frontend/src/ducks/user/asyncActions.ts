@@ -24,3 +24,20 @@ export const asyncRegisterUser = createAsyncThunk(
     };
   }
 );
+
+export const asyncSignInUser = createAsyncThunk(
+  "user/asyncSignInUser",
+  async (arg: {
+    email: string;
+    password: string;
+  }): Promise<{ userInfo: UserInfoModel; jwt: string }> => {
+    const response = await StrapiUtil.signInAccount(arg.email, arg.password);
+
+    LoggerUtil.debug(response);
+
+    return {
+      userInfo: response.data.user as UserInfoModel,
+      jwt: response.data.jwt as string,
+    };
+  }
+);

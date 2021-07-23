@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import createStore from "../ducks/createStore";
 import styled, { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import "react-markdown-editor-lite/lib/index.css";
 import FooterOrganism from "../components/organisms/FooterOrganism";
 import HeaderOrganism from "../components/organisms/HeaderOrganism";
 

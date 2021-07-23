@@ -1,10 +1,11 @@
+import { ChangeEvent } from "react";
 import axiosUtil from "./AxiosUtil";
 class StrapiUtil {
   /**
    * create account
-   * @param {string} username
-   * @param {string} email
-   * @param {string} password
+   * @param {string} username ユーザ名
+   * @param {string} email メールアドレス
+   * @param {string} password パスワード
    */
   public static createAccount(
     username: string,
@@ -20,13 +21,30 @@ class StrapiUtil {
 
   /**
    * sign in account
-   * @param {string} identifier
-   * @param {string} password
+   * @param {string} identifier メールアドレス
+   * @param {string} password パスワード
    */
   public static signInAccount(identifier: string, password: string) {
     return axiosUtil.post("/auth/local", {
       identifier,
       password,
+    });
+  }
+
+  /**
+   * upload file
+   * @param {File} file ファイル
+   * @param {string} jwt jwt
+   */
+  public static uploadFile(file: File, jwt: string) {
+    const uploadData = new FormData();
+    uploadData.append("files", file);
+
+    return axiosUtil.post("/upload", uploadData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${jwt}`,
+      },
     });
   }
 }

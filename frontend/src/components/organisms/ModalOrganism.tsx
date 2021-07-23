@@ -29,9 +29,9 @@ const Mask = styled.div`
 
 const Card = styled.div`
   margin: auto;
-  padding: 28px;
-  width: 32vw;
-  height: 32vw;
+  padding: 60px 40px;
+  width: calc(32vw - 40px);
+  height: calc(32vw - 60px);
   position: fixed;
   z-index: 3;
   inset: 0;
@@ -39,7 +39,7 @@ const Card = styled.div`
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 `;
 

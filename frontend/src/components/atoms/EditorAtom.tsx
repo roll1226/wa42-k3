@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { useUserState } from "../../ducks/user/selectors";
 import { env } from "../../env/DotEnv";
 import LoggerUtil from "../../utils/debugger/LoggerUtil";
 import StrapiUtil from "../../utils/lib/StrapiUtil";
@@ -11,6 +12,7 @@ const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
 
 const EditorAtom = () => {
   const [text, setText] = useState("");
+  const user = useUserState().user;
 
   // handle editor change
   const handleEditorChange = ({
@@ -27,7 +29,7 @@ const EditorAtom = () => {
   // handle image upload
   const handleImageUpload = async (file: File) => {
     try {
-      const jwt = SessionUtil.getSession("jwt");
+      const jwt = user.jwt ? user.jwt : SessionUtil.getSession("jwt");
       if (!jwt) throw new Error("jwt is null.");
 
       const result = await StrapiUtil.uploadFile(file, jwt);

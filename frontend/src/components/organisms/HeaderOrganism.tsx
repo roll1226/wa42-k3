@@ -1,5 +1,8 @@
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useUserState } from "../../ducks/user/selectors";
+import userSlice from "../../ducks/user/slice";
+import { ModalType } from "../../ducks/user/type";
 import { useUserInfoEffect } from "../../hooks/useUserInfoEffect";
 import GeneralColorStyle from "../../styles/GeneralColorStyle";
 import ColorUtil from "../../utils/color/ColorUtil";
@@ -21,7 +24,16 @@ const UserActionContainer = styled.div``;
 
 const HeaderOrganism = () => {
   useUserInfoEffect();
+  const dispatch = useDispatch();
   const state = useUserState().user;
+
+  const openModal = (modalType: ModalType) => {
+    dispatch(
+      userSlice.actions.setModalType({
+        modalType,
+      })
+    );
+  };
 
   return (
     <HeaderContainer>
@@ -29,9 +41,15 @@ const HeaderOrganism = () => {
 
       {!state.userInfo && (
         <UserActionContainer>
-          <RegisterButtonMolecule />
+          <RegisterButtonMolecule
+            isBorder={true}
+            onClick={() => openModal(ModalType.REGISTER)}
+          />
 
-          <SignInButtonMolecule />
+          <SignInButtonMolecule
+            isBorder={false}
+            onClick={() => openModal(ModalType.SIGN_IN)}
+          />
         </UserActionContainer>
       )}
       {state.userInfo && <SignOutButtonMolecule />}

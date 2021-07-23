@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserInfoModel } from "../../models/strapi/UserInfoModel";
 import SessionUtil from "../../utils/session/SessionUtil";
 import { asyncRegisterUser, asyncSignInUser } from "./asyncActions";
-import { UserStateType } from "./type";
+import { ModalType, UserStateType } from "./type";
 
 export const initialState: UserStateType = {
   userInfo: null,
@@ -10,6 +10,7 @@ export const initialState: UserStateType = {
   loading: false,
   isError: false,
   error: "",
+  modalType: ModalType.NULL,
 };
 
 const userSlice = createSlice({
@@ -29,6 +30,11 @@ const userSlice = createSlice({
       ...state,
       userInfo: null,
       jwt: "",
+    }),
+
+    setModalType: (state, action: PayloadAction<{ modalType: ModalType }>) => ({
+      ...state,
+      modalType: action.payload.modalType,
     }),
   },
 
@@ -86,6 +92,7 @@ const userSlice = createSlice({
           error: "",
           userInfo: action.payload.userInfo,
           jwt: action.payload.jwt,
+          modalType: ModalType.NULL,
         };
       }
     );
@@ -142,6 +149,7 @@ const userSlice = createSlice({
           error: "",
           userInfo: action.payload.userInfo,
           jwt: action.payload.jwt,
+          modalType: ModalType.NULL,
         };
       }
     );

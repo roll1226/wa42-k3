@@ -11,7 +11,7 @@ type Props = {
 };
 
 const ButtonContainer = styled.button<{ color: string; isBorder: boolean }>`
-  border-radius: 10000px;
+  border-radius: 4px;
   padding: 4px 24px;
   background: transparent;
   color: ${({ color }) => color};
@@ -34,6 +34,8 @@ const ButtonContainer = styled.button<{ color: string; isBorder: boolean }>`
       margin: 0px 24px;
       border: transparent;
       border-radius: 0px;
+      border-bottom: solid 1px transparent;
+
       &:hover {
         border-bottom: solid 1px ${ColorUtil.addOpacity(color, 0.8)};
       }

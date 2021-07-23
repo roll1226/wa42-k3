@@ -1,12 +1,25 @@
-import LoggerUtil from "../../utils/debugger/LoggerUtil";
+import GeneralColorStyle from "../../styles/GeneralColorStyle";
 import ButtonAtom from "../atoms/ButtonAtom";
 
-const RegisterButtonMolecule = () => {
-  const register = () => {
-    LoggerUtil.debug("register");
-  };
+type Props = {
+  isBorder: boolean;
+  onClick: () => void;
+  color?: string;
+};
 
-  return <ButtonAtom text={"ユーザ登録"} onClick={register} />;
+const RegisterButtonMolecule = ({
+  isBorder,
+  onClick,
+  color = GeneralColorStyle.White,
+}: Props) => {
+  return (
+    <ButtonAtom
+      text={"ユーザ登録"}
+      onClick={onClick}
+      color={color}
+      isBorder={isBorder}
+    />
+  );
 };
 
 export default RegisterButtonMolecule;

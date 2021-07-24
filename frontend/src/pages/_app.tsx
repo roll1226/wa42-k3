@@ -7,10 +7,12 @@ import "react-markdown-editor-lite/lib/index.css";
 import FooterOrganism from "../components/organisms/FooterOrganism";
 import HeaderOrganism from "../components/organisms/HeaderOrganism";
 import SignInModalOrganism from "../components/organisms/ModalOrganism";
+import GeneralColorStyle from "../styles/GeneralColorStyle";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
   body {
+    color: ${GeneralColorStyle.Black};
     font-family:
       "ヒラギノ丸ゴ Pro W4", "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "HG丸ｺﾞｼｯｸM-PRO", "HGMaruGothicMPRO";
   }
@@ -23,11 +25,11 @@ const Body = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-auto-columns: 100vw;
-  overflow: hidden;
+  overflow-x: hidden;
 `;
 
 const BodyContainer = styled.div`
-  padding: 40px;
+  padding: 80px 40px 120px;
 `;
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

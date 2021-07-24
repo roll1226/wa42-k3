@@ -1,3 +1,5 @@
+import { PostModel } from "./PostModel";
+
 export type UserInfoModel = {
   blocked: boolean | null;
   confirmed: boolean;
@@ -13,4 +15,5 @@ export type UserInfoModel = {
   };
   updated_at: string;
   username: string;
+  posts: PostModel[];
 };

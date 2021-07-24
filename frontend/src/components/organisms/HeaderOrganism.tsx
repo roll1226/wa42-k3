@@ -1,3 +1,4 @@
+import { useRouter } from "next/dist/client/router";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useUserState } from "../../ducks/user/selectors";
@@ -18,7 +19,9 @@ const HeaderContainer = styled.header`
   background: ${ColorUtil.addOpacity(GeneralColorStyle.Blue, 0.8)};
 `;
 
-const TitleContainer = styled.h1``;
+const TitleContainer = styled.h1`
+  cursor: pointer;
+`;
 
 const UserActionContainer = styled.div``;
 
@@ -26,6 +29,7 @@ const HeaderOrganism = () => {
   useUserInfoEffect();
   const dispatch = useDispatch();
   const state = useUserState().user;
+  const router = useRouter();
 
   const openModal = (modalType: ModalType) => {
     dispatch(
@@ -35,9 +39,13 @@ const HeaderOrganism = () => {
     );
   };
 
+  const pushHome = () => {
+    router.push("/");
+  };
+
   return (
     <HeaderContainer>
-      <TitleContainer>ロゴ</TitleContainer>
+      <TitleContainer onClick={pushHome}>ロゴ</TitleContainer>
 
       {!state.userInfo && (
         <UserActionContainer>

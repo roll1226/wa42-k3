@@ -2,9 +2,9 @@ import axiosUtil from "./AxiosUtil";
 class StrapiUtil {
   /**
    * create account
-   * @param {string} username ユーザ名
-   * @param {string} email メールアドレス
-   * @param {string} password パスワード
+   * @param {string} username [ユーザ名]
+   * @param {string} email [メールアドレス]
+   * @param {string} password [パスワード]
    */
   public static createAccount(
     username: string,
@@ -20,8 +20,8 @@ class StrapiUtil {
 
   /**
    * sign in account
-   * @param {string} identifier メールアドレス
-   * @param {string} password パスワード
+   * @param {string} identifier [メールアドレス]
+   * @param {string} password [パスワード]
    */
   public static signInAccount(identifier: string, password: string) {
     return axiosUtil.post("/auth/local", {
@@ -32,8 +32,8 @@ class StrapiUtil {
 
   /**
    * upload file
-   * @param {File} file ファイル
-   * @param {string} jwt jwt
+   * @param {File} file [ファイル]
+   * @param {string} jwt [jwt token]
    */
   public static uploadFile(file: File, jwt: string) {
     const uploadData = new FormData();
@@ -49,7 +49,7 @@ class StrapiUtil {
 
   /**
    * get me user info
-   * @param {string} jwt jwt
+   * @param {string} jwt [jwt token]
    */
   public static getMeUserInfo(jwt: string, id: number) {
     return axiosUtil.get(`/users/${id}`, {
@@ -57,6 +57,21 @@ class StrapiUtil {
         Authorization: `Bearer ${jwt}`,
       },
     });
+  }
+
+  /**
+   * get posts
+   */
+  public static getPosts() {
+    return axiosUtil.get("/posts");
+  }
+
+  /**
+   * get post
+   * @param {number} id [投稿ID]
+   */
+  public static getPost(id: number) {
+    return axiosUtil.get(`/posts/${id}`);
   }
 }
 

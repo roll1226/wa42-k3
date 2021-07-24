@@ -41,3 +41,17 @@ export const asyncSignInUser = createAsyncThunk(
     };
   }
 );
+
+export const asyncGetMeUserInfo = createAsyncThunk(
+  "user/asyncGetMeUserInfo",
+  async (arg: {
+    jwt: string;
+    id: number;
+  }): Promise<{ userInfo: UserInfoModel }> => {
+    const response = await StrapiUtil.getMeUserInfo(arg.jwt, arg.id);
+
+    LoggerUtil.debug("get me user info", response);
+
+    return { userInfo: response.data as UserInfoModel };
+  }
+);

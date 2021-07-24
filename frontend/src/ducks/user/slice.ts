@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserInfoModel } from "../../models/strapi/UserInfoModel";
 import SessionUtil from "../../utils/session/SessionUtil";
-import { asyncRegisterUser, asyncSignInUser } from "./asyncActions";
+import {
+  asyncGetMeUserInfo,
+  asyncRegisterUser,
+  asyncSignInUser,
+} from "./asyncActions";
 import { ModalType, UserStateType } from "./type";
 
 export const initialState: UserStateType = {
@@ -17,12 +21,8 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserState: (
-      state,
-      action: PayloadAction<{ userInfo: UserInfoModel | null; jwt: string }>
-    ) => ({
+    setUserState: (state, action: PayloadAction<{ jwt: string }>) => ({
       ...state,
-      userInfo: action.payload.userInfo,
       jwt: action.payload.jwt,
     }),
 
@@ -150,6 +150,59 @@ const userSlice = createSlice({
           userInfo: action.payload.userInfo,
           jwt: action.payload.jwt,
           modalType: ModalType.NULL,
+        };
+      }
+    );
+
+    // get me user info pending
+    builder.addCase(asyncGetMeUserInfo.pending, (state) => {
+      return {
+        ...state,
+        loading: true,
+        isError: false,
+        error: "",
+      };
+    });
+
+    // get me user info rejected
+    builder.addCase(
+      asyncGetMeUserInfo.rejected,
+      (
+        state,
+        action: RejectedAction<{
+          jwt: string;
+          id: number;
+        }>
+      ) => {
+        return {
+          ...state,
+          loading: false,
+          isError: true,
+          error: "エラーが発生しました。",
+        };
+      }
+    );
+
+    // get me user info fulfilled
+    builder.addCase(
+      asyncGetMeUserInfo.fulfilled,
+      (
+        state,
+        action: PayloadAction<{
+          userInfo: UserInfoModel;
+        }>
+      ) => {
+        SessionUtil.setSession(
+          "userInfo",
+          JSON.stringify(action.payload.userInfo)
+        );
+
+        return {
+          ...state,
+          loading: false,
+          isError: false,
+          error: "",
+          userInfo: action.payload.userInfo,
         };
       }
     );

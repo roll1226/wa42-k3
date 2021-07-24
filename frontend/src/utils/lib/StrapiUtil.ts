@@ -1,4 +1,3 @@
-import { ChangeEvent } from "react";
 import axiosUtil from "./AxiosUtil";
 class StrapiUtil {
   /**
@@ -43,6 +42,18 @@ class StrapiUtil {
     return axiosUtil.post("/upload", uploadData, {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+  }
+
+  /**
+   * get me user info
+   * @param {string} jwt jwt
+   */
+  public static getMeUserInfo(jwt: string, id: number) {
+    return axiosUtil.get(`/users/${id}`, {
+      headers: {
         Authorization: `Bearer ${jwt}`,
       },
     });

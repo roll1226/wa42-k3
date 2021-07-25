@@ -5,7 +5,7 @@ const EditorButtonMolecule = () => {
   const router = useRouter();
 
   const pushEditor = () => {
-    router.push("editor");
+    router.push("/editor");
   };
 
   return <ButtonAtom text={"投稿する"} isBorder={true} onClick={pushEditor} />;

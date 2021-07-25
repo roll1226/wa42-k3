@@ -63,7 +63,7 @@ class StrapiUtil {
    * get posts
    */
   public static getPosts() {
-    return axiosUtil.get("/posts");
+    return axiosUtil.get("/posts?_sort=updated_at:desc");
   }
 
   /**
@@ -72,6 +72,27 @@ class StrapiUtil {
    */
   public static getPost(id: number) {
     return axiosUtil.get(`/posts/${id}`);
+  }
+
+  public static postPost(
+    jwt: string,
+    title: string,
+    body: string,
+    userId: number
+  ) {
+    return axiosUtil.post(
+      "/posts",
+      {
+        title,
+        body,
+        users_permissions_user: userId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
   }
 }
 

@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useUserState } from "../../ducks/user/selectors";
 import { env } from "../../env/DotEnv";
 import LoggerUtil from "../../utils/debugger/LoggerUtil";
@@ -10,21 +10,21 @@ const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
   ssr: false,
 });
 
-const EditorAtom = () => {
-  const [text, setText] = useState("");
-  const user = useUserState().user;
+type Props = {
+  text: string;
+  onChange:
+    | ((
+        data: {
+          text: string;
+          html: string;
+        },
+        event?: ChangeEvent<HTMLTextAreaElement> | undefined
+      ) => void)
+    | undefined;
+};
 
-  // handle editor change
-  const handleEditorChange = ({
-    html,
-    text,
-  }: {
-    html: string;
-    text: string;
-  }) => {
-    LoggerUtil.debug(text, html);
-    setText(text);
-  };
+const EditorAtom = ({ text, onChange }: Props) => {
+  const user = useUserState().user;
 
   // handle image upload
   const handleImageUpload = async (file: File) => {
@@ -56,7 +56,7 @@ const EditorAtom = () => {
           hideMenu: true,
         },
       }}
-      onChange={handleEditorChange}
+      onChange={onChange}
       onImageUpload={handleImageUpload}
       renderHTML={(text) => <MarkdownAtom children={text} />}
     />

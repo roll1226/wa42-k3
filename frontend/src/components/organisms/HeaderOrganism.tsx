@@ -7,6 +7,7 @@ import { ModalType } from "../../ducks/user/type";
 import { useUserInfoEffect } from "../../hooks/useUserInfoEffect";
 import GeneralColorStyle from "../../styles/GeneralColorStyle";
 import ColorUtil from "../../utils/color/ColorUtil";
+import EditorButtonMolecule from "../molecules/EditorButtonMolecule";
 import RegisterButtonMolecule from "../molecules/RegisterButtonMolecule";
 import SignInButtonMolecule from "../molecules/SignInButtonMolecule";
 import SignOutButtonMolecule from "../molecules/SignOutButtonMolecule";
@@ -60,7 +61,12 @@ const HeaderOrganism = () => {
           />
         </UserActionContainer>
       )}
-      {state.userInfo && <SignOutButtonMolecule />}
+      {state.userInfo && (
+        <UserActionContainer>
+          <EditorButtonMolecule />
+          <SignOutButtonMolecule />
+        </UserActionContainer>
+      )}
     </HeaderContainer>
   );
 };

@@ -25,14 +25,18 @@ const LanguageFrame = styled.span`
 
 const components = {
   code({ node, inline, className, children, ...props }: CodeProps) {
-    const match = /language-(\w+)/.exec(className || "");
-    return !inline && match ? (
+    const matchNoName = /language-(\w+)/.exec(className || "");
+    const matchName = /language-(\w+)(:.+)/.exec(className || "");
+    const lang = matchNoName && matchNoName[1] ? matchNoName[1] : "";
+    const name = matchName && matchName[2] ? matchName[2].slice(1) : "";
+
+    return !inline && matchNoName ? (
       <CodeContainer>
-        {match[1] && <LanguageFrame>{match[1]}</LanguageFrame>}
+        <LanguageFrame>{name ? name : lang}</LanguageFrame>
 
         <SyntaxHighlighter
           style={materialDark}
-          language={match[1]}
+          language={lang}
           PreTag="div"
           children={String(children).replace(/\n$/, "")}
           {...props}
@@ -84,6 +88,7 @@ const MarkdownAtom = ({ children }: Props) => {
         remarkPlugins={[gfm]}
         children={children}
         components={components}
+        skipHtml={true}
       />
     </MarkdownContainer>
   );

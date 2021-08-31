@@ -22,6 +22,10 @@ const HeaderContainer = styled.header`
 
 const TitleContainer = styled.h1`
   cursor: pointer;
+  width: 20px;
+  img {
+    width: 50px;
+  }
 `;
 
 const UserActionContainer = styled.div``;
@@ -46,7 +50,9 @@ const HeaderOrganism = () => {
 
   return (
     <HeaderContainer>
-      <TitleContainer onClick={pushHome}>ロゴ</TitleContainer>
+      <TitleContainer onClick={pushHome}>
+        <img src="/logo_04.png" alt="ロゴ" />
+      </TitleContainer>
 
       {!state.userInfo && (
         <UserActionContainer>

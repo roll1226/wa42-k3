@@ -11,7 +11,12 @@ const FooterContainer = styled.footer`
   align-items: center;
 `;
 
-const FooterLogo = styled.h6``;
+const FooterLogo = styled.h6`
+  padding-bottom: 8px;
+  img {
+    width: 50px;
+  }
+`;
 
 const CopyRight = styled.small`
   font-size: 12px;
@@ -20,7 +25,9 @@ const CopyRight = styled.small`
 const FooterOrganism = () => {
   return (
     <FooterContainer>
-      <FooterLogo>ロゴ</FooterLogo>
+      <FooterLogo>
+        <img src="/logo_04.png" alt="ロゴ" />
+      </FooterLogo>
 
       <CopyRight>&copy; 2021 roll1226</CopyRight>
     </FooterContainer>

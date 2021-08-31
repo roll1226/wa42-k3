@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import GeneralColorStyle from "../../styles/GeneralColorStyle";
 import formatDateUtil from "../../utils/date/formatDateUtil";
+import Link from "next/link";
 
 type Props = {
   userId: number;
@@ -19,6 +20,7 @@ const PostCreator = styled.a`
   color: ${GeneralColorStyle.Black};
   text-decoration: none;
   color: #000;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
@@ -38,7 +40,9 @@ const PostCreatorAtom = ({
 }: Props) => {
   return (
     <PostCardTop>
-      <PostCreator href={`/users/${userId}`}>{username}</PostCreator>
+      <Link href={`/user/${userId}`}>
+        <PostCreator>{username}</PostCreator>
+      </Link>
       <PostCreateAt>
         が
         {updated_at

@@ -48,7 +48,6 @@ const userSlice = createSlice({
         error: "",
       };
     });
-
     // register user rejected
     builder.addCase(
       asyncRegisterUser.rejected,
@@ -68,7 +67,6 @@ const userSlice = createSlice({
         };
       }
     );
-
     // register user fulfilled
     builder.addCase(
       asyncRegisterUser.fulfilled,
@@ -106,7 +104,6 @@ const userSlice = createSlice({
         error: "",
       };
     });
-
     // sign in user rejected
     builder.addCase(
       asyncSignInUser.rejected,
@@ -125,7 +122,6 @@ const userSlice = createSlice({
         };
       }
     );
-
     // sign in user fulfilled
     builder.addCase(
       asyncSignInUser.fulfilled,
@@ -163,7 +159,6 @@ const userSlice = createSlice({
         error: "",
       };
     });
-
     // get me user info rejected
     builder.addCase(
       asyncGetMeUserInfo.rejected,
@@ -182,7 +177,6 @@ const userSlice = createSlice({
         };
       }
     );
-
     // get me user info fulfilled
     builder.addCase(
       asyncGetMeUserInfo.fulfilled,

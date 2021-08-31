@@ -50,13 +50,22 @@ class StrapiUtil {
   /**
    * get me user info
    * @param {string} jwt [jwt token]
+   * @param {string | number} id [ユーザID]
    */
-  public static getMeUserInfo(jwt: string, id: number) {
+  public static getMeUserInfo(jwt: string, id: string | number) {
     return axiosUtil.get(`/users/${id}`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
     });
+  }
+
+  /**
+   * get user info
+   * @param {string | number} id [ユーザID]
+   */
+  public static getUserInfo(id: string | number) {
+    return axiosUtil.get(`/users/${id}`);
   }
 
   /**
@@ -74,11 +83,18 @@ class StrapiUtil {
     return axiosUtil.get(`/posts/${id}`);
   }
 
+  /**
+   * post post
+   * @param {string} jwt [jwt token]
+   * @param {string} title [タイトル]
+   * @param {string} body [本文]
+   * @param {string | number} userId [ユーザID]
+   */
   public static postPost(
     jwt: string,
     title: string,
     body: string,
-    userId: number
+    userId: string | number
   ) {
     return axiosUtil.post(
       "/posts",
@@ -93,6 +109,14 @@ class StrapiUtil {
         },
       }
     );
+  }
+
+  /**
+   * get user post
+   * @param {string | number} userId [ユーザID]
+   */
+  public static getUserPost(userId: string | number) {
+    return axiosUtil.get(`/posts?_where[users_permissions_user.id]=${userId}`);
   }
 }
 

@@ -28,3 +28,16 @@ export const asyncGetPost = createAsyncThunk(
     };
   }
 );
+
+export const asyncGetUserPosts = createAsyncThunk(
+  "post/asyncGetUserPost",
+  async (arg: { id: string | number }): Promise<{ userPosts: PostModel[] }> => {
+    const response = await StrapiUtil.getUserPost(arg.id);
+
+    LoggerUtil.debug("user post", response);
+
+    return {
+      userPosts: response.data as PostModel[],
+    };
+  }
+);

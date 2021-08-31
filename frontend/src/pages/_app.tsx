@@ -15,6 +15,10 @@ const GlobalStyle = createGlobalStyle`
     color: ${GeneralColorStyle.Black};
     font-family:
       "ヒラギノ丸ゴ Pro W4", "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "HG丸ｺﾞｼｯｸM-PRO", "HGMaruGothicMPRO";
+
+    .rc-md-editor .editor-container .sec-md {
+      border-right: 2px solid #e0e0e0;
+    }
   }
 `;
 
